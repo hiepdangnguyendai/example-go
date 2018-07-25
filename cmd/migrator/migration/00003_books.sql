@@ -8,7 +8,8 @@ CREATE TABLE "public"."books" (
   "category_id" uuid,
   "author" text,
   "description" text,
-  CONSTRAINT "books_pkey" PRIMARY KEY ("id")
+  CONSTRAINT "books_pkey" PRIMARY KEY ("id"),
+  CONSTRAINT "book_category_id_fkey" FOREIGN KEY (category_id) REFERENCES categories(id) NOT DEFERRABLE
 ) WITH (oids = false);
 -- +goose Down
 -- SQL in this section is executed when the migration is rolled back.
