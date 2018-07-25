@@ -6,12 +6,13 @@ import (
 
 // Error Declaration
 var (
-	ErrNotFound        = errNotFound{}
-	ErrUnknown         = errUnknown{}
-	ErrNameIsRequired  = errNameIsRequired{}
-	ErrEmailIsRequired = errEmailIsRequired{}
-	ErrEmailIsInvalid  = errEmailIsInvalid{}
-	ErrRecordNotFound  = errRecordNotFound{}
+	ErrNotFound          = errNotFound{}
+	ErrUnknown           = errUnknown{}
+	ErrNameIsRequired    = errNameIsRequired{}
+	ErrEmailIsRequired   = errEmailIsRequired{}
+	ErrEmailIsInvalid    = errEmailIsInvalid{}
+	ErrRecordNotFound    = errRecordNotFound{}
+	ErrNameEmptyAndShort = errNameEmptyAndShort{}
 )
 
 type errNotFound struct{}
@@ -67,4 +68,10 @@ func (errNameIsRequired) Error() string {
 
 func (errNameIsRequired) StatusCode() int {
 	return http.StatusBadRequest
+}
+
+type errNameEmptyAndShort struct{}
+
+func (errNameEmptyAndShort) Error() string {
+	return "name not empty and more than 5 characters"
 }

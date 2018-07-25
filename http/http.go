@@ -42,42 +42,32 @@ func NewHTTPHandler(endpoints endpoints.Endpoints,
 		options...,
 	).ServeHTTP)
 
-	r.Route("/users", func(r chi.Router) {
+	r.Route("/categories", func(r chi.Router) {
 		r.Get("/", httptransport.NewServer(
 			endpoints.FindAllCategories,
-			//endpoints.FindAllUser, // find all category
 			categoryDecode.FindAllRequest,
-			//userDecode.FindAllRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
 		r.Get("/{category_id}", httptransport.NewServer(
 			endpoints.FindCategory,
-			//endpoints.FindUser,
-			//userDecode.FindRequest,
 			categoryDecode.FindRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
 		r.Post("/", httptransport.NewServer(
 			endpoints.CreateCategory,
-			//endpoints.CreateUser,
-			//userDecode.CreateRequest,
 			categoryDecode.CreateRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
 		r.Put("/{category_id}", httptransport.NewServer(
-			//endpoints.UpdateUser,
-			//userDecode.UpdateRequest,
 			endpoints.UpdateCategory,
 			categoryDecode.UpdateRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
 		r.Delete("/{category_id}", httptransport.NewServer(
-			//endpoints.DeleteUser,
-			//userDecode.DeleteRequest,
 			endpoints.DeleteUser,
 			categoryDecode.DeleteRequest,
 			encodeResponse,
