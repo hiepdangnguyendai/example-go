@@ -10,7 +10,7 @@ import (
 	httptransport "github.com/go-kit/kit/transport/http"
 
 	"github.com/hiepdangnguyendai/example-go/endpoints"
-	userDecode "github.com/hiepdangnguyendai/example-go/http/decode/json/user"
+	categoryDecode "github.com/hiepdangnguyendai/example-go/http/decode/json/category"
 )
 
 // NewHTTPHandler ...
@@ -44,32 +44,42 @@ func NewHTTPHandler(endpoints endpoints.Endpoints,
 
 	r.Route("/users", func(r chi.Router) {
 		r.Get("/", httptransport.NewServer(
-			endpoints.FindAllUser,
-			userDecode.FindAllRequest,
+			endpoints.FindAllCategories,
+			//endpoints.FindAllUser, // find all category
+			categoryDecode.FindAllRequest,
+			//userDecode.FindAllRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
-		r.Get("/{user_id}", httptransport.NewServer(
-			endpoints.FindUser,
-			userDecode.FindRequest,
+		r.Get("/{category_id}", httptransport.NewServer(
+			endpoints.FindCategory,
+			//endpoints.FindUser,
+			//userDecode.FindRequest,
+			categoryDecode.FindRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
 		r.Post("/", httptransport.NewServer(
-			endpoints.CreateUser,
-			userDecode.CreateRequest,
+			endpoints.CreateCategory,
+			//endpoints.CreateUser,
+			//userDecode.CreateRequest,
+			categoryDecode.CreateRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
-		r.Put("/{user_id}", httptransport.NewServer(
-			endpoints.UpdateUser,
-			userDecode.UpdateRequest,
+		r.Put("/{category_id}", httptransport.NewServer(
+			//endpoints.UpdateUser,
+			//userDecode.UpdateRequest,
+			endpoints.UpdateCategory,
+			categoryDecode.UpdateRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
-		r.Delete("/{user_id}", httptransport.NewServer(
+		r.Delete("/{category_id}", httptransport.NewServer(
+			//endpoints.DeleteUser,
+			//userDecode.DeleteRequest,
 			endpoints.DeleteUser,
-			userDecode.DeleteRequest,
+			categoryDecode.DeleteRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
