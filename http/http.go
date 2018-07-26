@@ -10,7 +10,9 @@ import (
 	httptransport "github.com/go-kit/kit/transport/http"
 
 	"github.com/hiepdangnguyendai/example-go/endpoints"
+	bookDecode "github.com/hiepdangnguyendai/example-go/http/decode/json/book"
 	categoryDecode "github.com/hiepdangnguyendai/example-go/http/decode/json/category"
+	lendDecode "github.com/hiepdangnguyendai/example-go/http/decode/json/lend"
 )
 
 // NewHTTPHandler ...
@@ -70,6 +72,23 @@ func NewHTTPHandler(endpoints endpoints.Endpoints,
 		r.Delete("/{category_id}", httptransport.NewServer(
 			endpoints.DeleteUser,
 			categoryDecode.DeleteRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+
+	})
+	r.Route("/books", func(r chi.Router) {
+		r.Get("/", httptransport.NewServer(
+			endpoints.FindAllBooks,
+			bookDecode.FindAllRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+	})
+	r.Route("/lends", func(r chi.Router) {
+		r.Get("/", httptransport.NewServer(
+			endpoints.FindAllLens,
+			lendDecode.FindAllRequest,
 			encodeResponse,
 			options...,
 		).ServeHTTP)

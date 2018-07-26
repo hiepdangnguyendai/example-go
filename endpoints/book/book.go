@@ -11,9 +11,10 @@ import (
 )
 
 type CreateData struct {
-	Name        string `json:"name"`
-	Author      string `json:"author"`
-	Description string `json:"author"`
+	Name        string      `json:"name"`
+	Author      string      `json:"author"`
+	Description string      `json:"Description"`
+	Category_Id domain.UUID `json:"category_id"`
 }
 type CreateRequest struct {
 	Book CreateData `json:"book"`
@@ -33,6 +34,7 @@ func MakeCreateEndpoint(s service.Service) endpoint.Endpoint {
 				Name:        req.Book.Name,
 				Author:      req.Book.Author,
 				Description: req.Book.Description,
+				Category_Id: req.Book.Category_Id,
 			}
 		)
 		err := s.BookService.Create(ctx, book)
@@ -84,6 +86,7 @@ type UpdateData struct {
 	Name        string      `json:"name"`
 	Author      string      `json:"author"`
 	Description string      `json:"description"`
+	Category_Id domain.UUID `json:"category_id"`
 }
 type UpdateRequest struct {
 	Book UpdateData `json:"book"`
@@ -101,6 +104,7 @@ func MakeUpdateEndpoint(s service.Service) endpoint.Endpoint {
 				Name:        req.Book.Name,
 				Author:      req.Book.Author,
 				Description: req.Book.Description,
+				Category_Id: req.Book.Category_Id,
 			}
 		)
 		res, err := s.BookService.Update(ctx, &book)

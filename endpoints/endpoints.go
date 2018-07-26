@@ -6,6 +6,7 @@ import (
 
 	"github.com/hiepdangnguyendai/example-go/endpoints/book"
 	"github.com/hiepdangnguyendai/example-go/endpoints/category"
+	"github.com/hiepdangnguyendai/example-go/endpoints/lend"
 	"github.com/hiepdangnguyendai/example-go/endpoints/user"
 )
 
@@ -29,6 +30,12 @@ type Endpoints struct {
 	CreateBook   endpoint.Endpoint
 	UpdateBook   endpoint.Endpoint
 	DeleteBook   endpoint.Endpoint
+	// Lend Endpoint
+	FindLend    endpoint.Endpoint
+	FindAllLens endpoint.Endpoint
+	CreateLend  endpoint.Endpoint
+	UpdateLend  endpoint.Endpoint
+	DeleteLend  endpoint.Endpoint
 }
 
 // MakeServerEndpoints returns an Endpoints struct
@@ -52,5 +59,12 @@ func MakeServerEndpoints(s service.Service) Endpoints {
 		CreateBook:   book.MakeCreateEndpoint(s),
 		UpdateBook:   book.MakeUpdateEndpoint(s),
 		DeleteBook:   book.MakeDeleteEnpoint(s),
+		// Lend Enpoint
+
+		FindLend:    lend.MakeFindEndpoint(s),
+		FindAllLens: lend.MakeFindAllEndpoint(s),
+		CreateLend:  lend.MakeCreateEndpoint(s),
+		UpdateLend:  lend.MakeUpdateEnpoint(s),
+		DeleteLend:  lend.MakeDeleteEndpoint(s),
 	}
 }
