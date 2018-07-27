@@ -70,7 +70,7 @@ func NewHTTPHandler(endpoints endpoints.Endpoints,
 			options...,
 		).ServeHTTP)
 		r.Delete("/{category_id}", httptransport.NewServer(
-			endpoints.DeleteUser,
+			endpoints.DeleteCategory,
 			categoryDecode.DeleteRequest,
 			encodeResponse,
 			options...,

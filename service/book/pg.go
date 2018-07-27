@@ -24,7 +24,7 @@ func ValidationCategoryExisted(s *pgService, id domain.UUID) bool {
 	return true
 }
 func (s *pgService) Create(_ context.Context, p *domain.Book) error {
-	if !ValidationCategoryExisted(s, p.Category_Id) {
+	if ValidationCategoryExisted(s, p.Category_Id) {
 		return s.db.Create(p).Error
 	} else {
 

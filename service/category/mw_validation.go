@@ -19,11 +19,12 @@ func ValidationMiddleware() func(Service) Service {
 }
 func (mw validationMiddleware) Create(ctx context.Context, category *domain.Category) (err error) {
 	switch {
+	case len(category.Name) == 0:
+		return ErrNameEmpty
 	case len(category.Name) < 5:
 		return ErrNameShort
-	case category.Name == "":
-		return ErrNameEmpty
 	}
+
 	return mw.Service.Create(ctx, category)
 }
 
@@ -37,7 +38,7 @@ func (mw validationMiddleware) Update(ctx context.Context, category *domain.Cate
 	switch {
 	case len(category.Name) < 5:
 		return nil, ErrNameShort
-	case category.Name == "":
+	case len(category.Name) == 0:
 		return nil, ErrNameEmpty
 	}
 	return mw.Service.Update(ctx, category)
