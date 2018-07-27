@@ -16,8 +16,20 @@ func NewPGService(db *gorm.DB) Service {
 		db: db,
 	}
 }
+func ValidationCategoryExisted(s *pgService, id domain.UUID) bool {
+	var category domain.Category
+	if err := s.db.Where("id = ?", id).First(&category).Error; err != nil {
+		return false
+	}
+	return true
+}
 func (s *pgService) Create(_ context.Context, p *domain.Book) error {
-	return s.db.Create(p).Error
+	if !ValidationCategoryExisted(s, p.Category_Id) {
+		return s.db.Create(p).Error
+	} else {
+
+		return ErrCategoryNotExisted
+	}
 }
 func (s *pgService) Update(_ context.Context, p *domain.Book) (*domain.Book, error) {
 	old := domain.Book{Model: domain.Model{ID: p.ID}}

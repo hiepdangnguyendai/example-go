@@ -6,14 +6,15 @@ import (
 
 // Error Declaration
 var (
-	ErrNotFound        = errNotFound{}
-	ErrUnknown         = errUnknown{}
-	ErrNameIsRequired  = errNameIsRequired{}
-	ErrEmailIsRequired = errEmailIsRequired{}
-	ErrEmailIsInvalid  = errEmailIsInvalid{}
-	ErrRecordNotFound  = errRecordNotFound{}
-	ErrNameEmpty       = errNameEmpty{}
-	ErrNameShort       = errNameShort{}
+	ErrNotFound           = errNotFound{}
+	ErrUnknown            = errUnknown{}
+	ErrNameIsRequired     = errNameIsRequired{}
+	ErrEmailIsRequired    = errEmailIsRequired{}
+	ErrEmailIsInvalid     = errEmailIsInvalid{}
+	ErrRecordNotFound     = errRecordNotFound{}
+	ErrNameEmpty          = errNameEmpty{}
+	ErrNameShort          = errNameShort{}
+	ErrCategoryNotExisted = errCategoryNotExisted{}
 )
 
 type errNotFound struct{}
@@ -81,4 +82,10 @@ type errNameShort struct{}
 
 func (errNameShort) Error() string {
 	return "name less than five characters"
+}
+
+type errCategoryNotExisted struct{}
+
+func (errCategoryNotExisted) Error() string {
+	return "category not existed"
 }
