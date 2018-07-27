@@ -42,7 +42,7 @@ Time spent: **{{5}}** hours spent in total
   * [x] validate email of user is a valid email.
   
 * [] API must be able to CRUD category of books:
-  * [ ] Each category should have the following fields:
+  * [x] Each category should have the following fields:
     * id (uuid)
     * name (string)
   * [x] API must be able to get detail of a category.
@@ -74,7 +74,7 @@ Time spent: **{{5}}** hours spent in total
   * [x] validate name of a book is not empty and length > 5 characters. if not reject it with error message
   * [x] validate description of a book is not empty and length > 5 characters. if not reject it with error message
   
-* [ ] API must be able to make action: user lend a book:
+* [x] API must be able to make action: user lend a book:
   * [x] API should have the following fields:
     * id (uuid)
     * book_id (uuid)
