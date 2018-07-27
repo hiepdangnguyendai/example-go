@@ -16,6 +16,10 @@ import (
 	"github.com/hiepdangnguyendai/example-go/endpoints"
 	serviceHttp "github.com/hiepdangnguyendai/example-go/http"
 	"github.com/hiepdangnguyendai/example-go/service"
+
+	bookSvc "github.com/hiepdangnguyendai/example-go/service/book"
+	categorySvc "github.com/hiepdangnguyendai/example-go/service/category"
+	lendSvc "github.com/hiepdangnguyendai/example-go/service/lend"
 	userSvc "github.com/hiepdangnguyendai/example-go/service/user"
 )
 
@@ -53,10 +57,24 @@ func main() {
 	var (
 		pgDB, closeDB = pg.New(os.Getenv("PG_DATASOURCE"))
 		s             = service.Service{
+
 			UserService: service.Compose(
 				userSvc.NewPGService(pgDB),
 				userSvc.ValidationMiddleware(),
 			).(userSvc.Service),
+
+			CategoryService: service.Compose(
+				categorySvc.NewPGService(pgDB),
+				categorySvc.ValidationMiddleware(),
+			).(categorySvc.Service),
+			BookService: service.Compose(
+				bookSvc.NewPGService(pgDB),
+				bookSvc.ValidationMiddleware(),
+			).(bookSvc.Service),
+			LendService: service.Compose(
+				lendSvc.NewPGService(pgDB),
+				lendSvc.ValidationMiddleware(),
+			).(lendSvc.Service),
 		}
 	)
 	defer closeDB()
