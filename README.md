@@ -2,9 +2,9 @@
 
 **Library API excercise** is a golang implement(using go-kit, gorm) of library API
 
-Submitted by: **{{github_user_name}}**
+Submitted by: **{{hiepdangnguyendai}}**
 
-Time spent: **{{time_spent}}** hours spent in total
+Time spent: **{{5}}** hours spent in total
 
 ## Prerequisite
 
