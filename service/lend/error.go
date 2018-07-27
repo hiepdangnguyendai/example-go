@@ -5,17 +5,13 @@ import (
 )
 
 var (
-	ErrNotFound = errNotFound{}
-	ErrUnknown  = errUnknown{}
-
+	ErrNotFound         = errNotFound{}
+	ErrUnknown          = errUnknown{}
 	ErrUserIDIsRequired = errUserIDIsRequired{}
 	ErrUserIsNotExisted = errUserIsNotExisted{}
-
 	ErrBookIDIsRequired = errBookIDIsRequired{}
 	ErrBookIsNotExisted = errBookIsNotExisted{}
-
-	ErrToIsRequired = errToIsRequired{}
-
+	ErrToIsRequired     = errToIsRequired{}
 	ErrRecordNotFound   = errRecordNotFound{}
 	ErrBookNotAvailable = errBookNotAvailable{}
 )
@@ -41,7 +37,7 @@ func (errUnknown) StatusCode() int {
 type errRecordNotFound struct{}
 
 func (errRecordNotFound) Error() string {
-	return "client record not found"
+	return "record not found"
 }
 func (errRecordNotFound) StatusCode() int {
 	return http.StatusNotFound
@@ -50,7 +46,7 @@ func (errRecordNotFound) StatusCode() int {
 type errUserIDIsRequired struct{}
 
 func (errUserIDIsRequired) Error() string {
-	return "User ID is required"
+	return "UserID is required"
 }
 
 func (errUserIDIsRequired) StatusCode() int {
@@ -70,7 +66,7 @@ func (errUserIsNotExisted) StatusCode() int {
 type errBookIDIsRequired struct{}
 
 func (errBookIDIsRequired) Error() string {
-	return "Book ID is required"
+	return "BookID is required"
 }
 
 func (errBookIDIsRequired) StatusCode() int {
@@ -90,7 +86,7 @@ func (errBookIsNotExisted) StatusCode() int {
 type errToIsRequired struct{}
 
 func (errToIsRequired) Error() string {
-	return "To be required"
+	return "required"
 }
 
 func (errToIsRequired) StatusCode() int {
@@ -100,7 +96,7 @@ func (errToIsRequired) StatusCode() int {
 type errBookNotAvailable struct{}
 
 func (errBookNotAvailable) Error() string {
-	return "The book's not available"
+	return " book not available"
 }
 
 func (errBookNotAvailable) StatusCode() int {

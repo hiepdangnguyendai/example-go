@@ -6,13 +6,14 @@ import (
 
 // Error Declaration
 var (
-	ErrNotFound          = errNotFound{}
-	ErrUnknown           = errUnknown{}
-	ErrNameIsRequired    = errNameIsRequired{}
-	ErrEmailIsRequired   = errEmailIsRequired{}
-	ErrEmailIsInvalid    = errEmailIsInvalid{}
-	ErrRecordNotFound    = errRecordNotFound{}
-	ErrNameEmptyAndShort = errNameEmptyAndShort{}
+	ErrNotFound        = errNotFound{}
+	ErrUnknown         = errUnknown{}
+	ErrNameIsRequired  = errNameIsRequired{}
+	ErrEmailIsRequired = errEmailIsRequired{}
+	ErrEmailIsInvalid  = errEmailIsInvalid{}
+	ErrRecordNotFound  = errRecordNotFound{}
+	ErrNameEmpty       = errNameEmpty{}
+	ErrNameShort       = errNameShort{}
 )
 
 type errNotFound struct{}
@@ -54,7 +55,7 @@ func (errEmailIsInvalid) StatusCode() int {
 type errRecordNotFound struct{}
 
 func (errRecordNotFound) Error() string {
-	return "client record not found"
+	return "record not found"
 }
 func (errRecordNotFound) StatusCode() int {
 	return http.StatusNotFound
@@ -63,15 +64,21 @@ func (errRecordNotFound) StatusCode() int {
 type errNameIsRequired struct{}
 
 func (errNameIsRequired) Error() string {
-	return "user name is required"
+	return "name is required"
 }
 
 func (errNameIsRequired) StatusCode() int {
 	return http.StatusBadRequest
 }
 
-type errNameEmptyAndShort struct{}
+type errNameEmpty struct{}
 
-func (errNameEmptyAndShort) Error() string {
-	return "name not empty and more than 5 characters"
+func (errNameEmpty) Error() string {
+	return "name empty"
+}
+
+type errNameShort struct{}
+
+func (errNameShort) Error() string {
+	return "name less than five characters"
 }

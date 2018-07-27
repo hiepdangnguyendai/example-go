@@ -84,6 +84,30 @@ func NewHTTPHandler(endpoints endpoints.Endpoints,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
+		r.Get("/{book_id}", httptransport.NewServer(
+			endpoints.FindBook,
+			bookDecode.FindRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+		r.Post("/", httptransport.NewServer(
+			endpoints.CreateBook,
+			bookDecode.CreateRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+		r.Put("/{book_id}", httptransport.NewServer(
+			endpoints.UpdateBook,
+			bookDecode.UpdateRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+		r.Delete("/{book_id}", httptransport.NewServer(
+			endpoints.DeleteBook,
+			bookDecode.DeleteRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
 	})
 	r.Route("/lends", func(r chi.Router) {
 		r.Get("/", httptransport.NewServer(
@@ -92,6 +116,31 @@ func NewHTTPHandler(endpoints endpoints.Endpoints,
 			encodeResponse,
 			options...,
 		).ServeHTTP)
+		r.Get("/{lend_id}", httptransport.NewServer(
+			endpoints.FindLend,
+			lendDecode.FindRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+		r.Post("/", httptransport.NewServer(
+			endpoints.CreateLend,
+			lendDecode.CreateRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+		r.Put("/{lend_id}", httptransport.NewServer(
+			endpoints.UpdateLend,
+			lendDecode.UpdateRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+		r.Delete("/{lend_id}", httptransport.NewServer(
+			endpoints.DeleteLend,
+			lendDecode.DeleteRequest,
+			encodeResponse,
+			options...,
+		).ServeHTTP)
+
 	})
 
 	return r

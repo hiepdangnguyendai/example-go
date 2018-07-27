@@ -19,19 +19,14 @@ func ValidationMiddleware() func(Service) Service {
 }
 func (mw validationMiddleware) Create(ctx context.Context, book *domain.Book) (err error) {
 	switch {
-	case len(book.Name) <= 5:
-		return ErrNameEmptyAndShort
+	case len(book.Name) < 5:
+		return ErrNameShort
 	case book.Name == "":
-		return ErrNameIsRequired
-	}
-	switch {
-	case len(book.Description) <= 5:
-		return ErrNameEmptyAndShort
-	case book.Description == "":
-		return ErrNameIsRequired
+		return ErrNameEmpty
 	}
 	return mw.Service.Create(ctx, book)
 }
+
 func (mw validationMiddleware) FindAll(ctx context.Context) ([]domain.Book, error) {
 	return mw.Service.FindAll(ctx)
 }
@@ -40,16 +35,10 @@ func (mw validationMiddleware) Find(ctx context.Context, book *domain.Book) (*do
 }
 func (mw validationMiddleware) Update(ctx context.Context, book *domain.Book) (*domain.Book, error) {
 	switch {
-	case len(book.Description) <= 5:
-		return nil, ErrNameEmptyAndShort
-	case book.Description == "":
-		return nil, ErrNameIsRequired
-	}
-	switch {
-	case len(book.Name) <= 5:
-		return nil, ErrNameEmptyAndShort
+	case len(book.Name) < 5:
+		return nil, ErrNameShort
 	case book.Name == "":
-		return nil, ErrNameIsRequired
+		return nil, ErrNameEmpty
 	}
 	return mw.Service.Update(ctx, book)
 }
